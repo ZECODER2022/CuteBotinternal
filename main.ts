@@ -10,30 +10,28 @@ enum RadioMessage {
     Light = 10501
 }
 radio.onReceivedMessage(RadioMessage.Forward, function () {
-    cuteBot.forward()
+    cuteBot.motors(100, 100)
 })
 radio.onReceivedMessage(RadioMessage.Lights, function () {
-    cuteBot.colorLight(cuteBot.RGBLights.RGB_L, 0x0000ff)
-    cuteBot.colorLight(cuteBot.RGBLights.RGB_R, 0x0000ff)
-    strip = neopixel.create(DigitalPin.P15, 2, NeoPixelMode.RGB)
-    strip.showColor(neopixel.colors(NeoPixelColors.Red))
-})
-radio.onReceivedMessage(RadioMessage.Light, function () {
-    cuteBot.closeheadlights()
+	
 })
 radio.onReceivedMessage(RadioMessage.Backward, function () {
-    cuteBot.backforward()
+    cuteBot.motors(-100, -100)
 })
 radio.onReceivedMessage(RadioMessage.Right, function () {
-    cuteBot.turnright()
+    cuteBot.motors(100, 50)
 })
 radio.onReceivedMessage(RadioMessage.Stop, function () {
     cuteBot.stopcar()
 })
 radio.onReceivedMessage(RadioMessage.Left, function () {
-    cuteBot.turnleft()
+    cuteBot.motors(50, 100)
 })
 radio.onReceivedMessage(RadioMessage.Wifi, function () {
+    cuteBot.colorLight(cuteBot.RGBLights.RGB_L, 0x0000ff)
+    cuteBot.colorLight(cuteBot.RGBLights.RGB_R, 0x0000ff)
+    strip = neopixel.create(DigitalPin.P15, 2, NeoPixelMode.RGB)
+    strip.showColor(neopixel.colors(NeoPixelColors.Red))
     basic.showLeds(`
         # . . . .
         # . . . .
@@ -69,7 +67,6 @@ radio.onReceivedMessage(RadioMessage.Wifi, function () {
         # # # # #
         # # # # #
         `)
-    basic.showString("Connected")
 })
 let strip: neopixel.Strip = null
 radio.setGroup(2)
